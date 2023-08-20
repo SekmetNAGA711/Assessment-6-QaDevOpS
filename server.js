@@ -9,6 +9,7 @@ const playerRecord = {
 const app = express();
 
 app.use(express.json());
+app.use(express.static(`${__dirname}/public`))
 
 // Add up the total health of all the robots
 const calculateTotalHealth = (robots) =>
@@ -37,7 +38,7 @@ const calculateHealthAfterAttack = ({ playerDuo, compDuo }) => {
 
 app.get("/api/robots", (req, res) => {
   try {
-    res.status(200).send(botsArr);
+    res.status(200).send(bots);
   } catch (error) {
     console.error("ERROR GETTING BOTS", error);
     res.sendStatus(400);
@@ -68,7 +69,7 @@ app.post("/api/duel", (req, res) => {
       playerRecord.losses += 1;
       res.status(200).send("You lost!");
     } else {
-      playerRecord.losses += 1;
+      playerRecord.wins += 1;
       res.status(200).send("You won!");
     }
   } catch (error) {
