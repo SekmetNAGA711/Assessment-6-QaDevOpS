@@ -9,6 +9,16 @@ const playerRecord = {
 const app = express();
 
 app.use(express.json());
+// include and initialize the rollbar library with your access token
+var Rollbar = require('rollbar')
+var rollbar = new Rollbar({
+  accessToken: 'fb31428427b549ccbe3a902a3909ab0c',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+})
+
+// record a generic message and send it to Rollbar
+rollbar.log('Hello world!')
 app.use(express.static(`${__dirname}/public`))
 
 // Add up the total health of all the robots
