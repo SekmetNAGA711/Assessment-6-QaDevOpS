@@ -49,7 +49,9 @@ const calculateHealthAfterAttack = ({ playerDuo, compDuo }) => {
 app.get("/api/robots", (req, res) => {
   try {
     res.status(200).send(bots);
+    rollbar.info("someone accessed bots list")
   } catch (error) {
+    rollbar.error("someone was not able to get bot list")
     console.error("ERROR GETTING BOTS", error);
     res.sendStatus(400);
   }
@@ -59,8 +61,10 @@ app.get("/api/robots/shuffled", (req, res) => {
   try {
     let shuffled = shuffle(bots);
     res.status(200).send(shuffled);
+    rollbar.info("someone hit the draw button")
   } catch (error) {
     console.error("ERROR GETTING SHUFFLED BOTS", error);
+    rollbar.critical("someone was not able to draw bots")
     res.sendStatus(400);
   }
 });
@@ -78,12 +82,15 @@ app.post("/api/duel", (req, res) => {
     if (compHealth > playerHealth) {
       playerRecord.losses += 1;
       res.status(200).send("You lost!");
+      rollbar.info("Somone lost a duel")
     } else {
       playerRecord.wins += 1;
       res.status(200).send("You won!");
+      rollbar.info("Somone won a duel")
     }
   } catch (error) {
     console.log("ERROR DUELING", error);
+    rollbar.warning("Someone was not able to Duel")
     res.sendStatus(400);
   }
 });
