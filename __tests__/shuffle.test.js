@@ -1,11 +1,11 @@
-// const shuffle = require("../src/shuffle");
-const {copyArray, array} = require("../src/shuffle");
-
-let mySource = [1,3,7,8,11]
+const shuffle = require("../src/shuffle");
 
 describe("shuffle should...", () => {
   // CODE HERE
   test("Shuffle should return an array", ()=>{
-    expect([1,3,7,8,11]).toEqual([1,3,7,8,11])
+   expect(shuffle()).tobe()
+  })
+  test("Shuffle should return same length of an array", ()=>{
+    expect(shuffle([1, 2, 3])).toEqual([1, 2, 3])
   })
 });
