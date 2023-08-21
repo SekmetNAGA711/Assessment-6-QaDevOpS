@@ -1,8 +1,7 @@
 // Create an array of shuffled values, using a version of the
 // [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher-Yates_shuffle).
 
-let mySource = [1,3,7,8,11]
-let myArray = []
+
 
 const copyArray = (source, array) => {
   let index = -1;
